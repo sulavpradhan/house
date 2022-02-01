@@ -4,6 +4,8 @@ import { useState } from "react";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibilityIcon from "../assets/svg/visibilityIcon.svg";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { toast } from "react-toastify";
+import OAuth from "../components/OAuth";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -36,7 +38,9 @@ const SignIn = () => {
       if (user) {
         navigate("/");
       }
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Bad User credintials");
+    }
   };
 
   return (
@@ -83,9 +87,13 @@ const SignIn = () => {
               </button>
             </div>
           </form>
-          <Link to="/sign-up" className="registerLink">
-            Sign Up instead
-          </Link>
+
+          <OAuth />
+          <div>
+            <Link to="/sign-up" className="registerLink">
+              Sign Up instead
+            </Link>
+          </div>
         </main>
       </div>
     </>

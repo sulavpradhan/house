@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import ListingItem from "../components/ListingItem";
 import Spinner from "../components/Spinner";
 
-const Offers = () => {
+const Category = () => {
   const [listings, setListings] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -30,7 +30,7 @@ const Offers = () => {
         //Create a query
         const q = query(
           listingRef,
-          where("offer", "==", true),
+          where("type", "==", params.categoryName),
           orderBy("timestamp", "desc"),
           limit(10)
         );
@@ -54,7 +54,7 @@ const Offers = () => {
       }
     };
     fetchListings();
-  }, []);
+  }, [params.categoryName]);
 
   return (
     <div className="category">
@@ -82,10 +82,10 @@ const Offers = () => {
           </main>
         </>
       ) : (
-        <p>There are no current offers</p>
+        <p>No listings for {params.categoryName}</p>
       )}
     </div>
   );
 };
 
-export default Offers;
+export default Category;

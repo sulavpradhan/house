@@ -10,6 +10,8 @@ import {
 } from "firebase/auth";
 import { db } from "../firebase.config";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import { toast } from "react-toastify";
+import OAuth from "../components/OAuth";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -43,7 +45,9 @@ const SignUp = () => {
       await setDoc(doc(db, "users", user.uid), formDataCopy);
 
       navigate("/");
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Can not sign up");
+    }
   };
 
   const formDataHandler = (e) => {
@@ -105,9 +109,12 @@ const SignUp = () => {
             </button>
           </div>
         </form>
-        <Link to="/sign-in" className="registerLink">
-          Sign In Instead
-        </Link>
+        <OAuth />
+        <div>
+          <Link to="/sign-in" className="registerLink">
+            Sign In Instead
+          </Link>
+        </div>
       </div>
     </div>
   );
