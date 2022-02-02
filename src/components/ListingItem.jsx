@@ -21,7 +21,7 @@ const ListingItem = ({ listing, id }) => {
           <p className="categoryListingLocation">{listing.location}</p>
           <p className="categoryListingName">{listing.name}</p>
           <p className="categoryListingPrice">
-            ${listing.offer ? listing.discountPrice : listing.regularPrice}
+            ${listing.offer ? listing.discountedPrice : listing.regularPrice}
             {listing.type === "rent" && " / Month"}
           </p>
           <div className="categoryListingInfoDiv">
